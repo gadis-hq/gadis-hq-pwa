@@ -1,27 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <title>Gadis QS HQ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gadis QS HQ App</title>
 
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#c2185b">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e91e63">
+<link rel="icon" href="icon-192.png">
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(function() {
-          console.log("Service Worker Registered");
-        });
-    }
-  </script>
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#ffd6e7,#ffeef5);
+  text-align:center;
+}
+
+.container{
+  padding:40px 20px;
+}
+
+h1{
+  color:#c2185b;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.1);
+  margin-top:20px;
+}
+
+.install-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#e91e63;
+  color:white;
+  border:none;
+  padding:14px 20px;
+  border-radius:30px;
+  font-weight:bold;
+  box-shadow:0 4px 10px rgba(0,0,0,0.3);
+  display:none;
+  z-index:999;
+}
+</style>
 </head>
 
 <body>
-  <h2>Loading HQ Dashboard...</h2>
 
-  <script>
-    window.location.href = "https://gadishq.blogspot.com/p/dashboard-hq.html";
-  </script>
+<div class="container">
+  <h1>Gadis QS HQ</h1>
+  <div class="card">
+    <p>Ultra Pink Edition HQ PWA</p>
+    <p>Sistem Pengesahan & Dashboard</p>
+    <button onclick="redirectBlogger()">Masuk Dashboard</button>
+  </div>
+</div>
+
+<button id="installBtn" class="install-btn">
+Install HQ App
+</button>
+
+<script>
+function redirectBlogger(){
+  window.location.href="https://gadishq.blogspot.com/";
+}
+
+/* =========================
+   SERVICE WORKER REGISTER
+========================= */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('service-worker.js')
+    .then(function(reg){
+      console.log("Service Worker Registered", reg);
+    })
+    .catch(function(err){
+      console.log("SW registration failed", err);
+    });
+  });
+}
+
+/* =========================
+   INSTALL PROMPT SYSTEM
+========================= */
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById("installBtn").style.display = "block";
+});
+
+document.getElementById("installBtn").addEventListener("click", async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+      console.log("User accepted install");
+    } else {
+      console.log("User dismissed install");
+    }
+    deferredPrompt = null;
+    document.getElementById("installBtn").style.display = "none";
+  }
+});
+</script>
+
 </body>
 </html>
