@@ -1,12 +1,10 @@
 {
-  "name": "Gadis QS HQ Dashboard",
+  "name": "Gadis QS HQ",
   "short_name": "Gadis HQ",
-  "start_url": "/gadis-hq-pwa/",
-  "scope": "/gadis-hq-pwa/",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#ffe6f0",
-  "theme_color": "#c2185b",
-  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#e91e63",
   "icons": [
     {
       "src": "icon-192.png",
