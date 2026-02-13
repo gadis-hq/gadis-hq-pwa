@@ -1,0 +1,21 @@
+{
+  "name": "Gadis QS HQ Dashboard",
+  "short_name": "Gadis HQ",
+  "start_url": "https://gadishq.blogspot.com/p/dashboard-hq.html",
+  "display": "standalone",
+  "background_color": "#ffe6f0",
+  "theme_color": "#c2185b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://blogger.googleusercontent.com/img/YOUR_ICON_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://blogger.googleusercontent.com/img/YOUR_ICON_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
